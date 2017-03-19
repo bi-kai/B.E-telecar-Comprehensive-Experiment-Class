@@ -1,2 +1,4 @@
-# B.E-telecar-Comprehensive-Experiment-Class
-Telecar, the work on Comprehensive Experiment Class.
+# 大三综合开发试验--智能小车项目
+1. 遥控功能；
+2. AD/DA录音功能；
+3. 远距离数据通信功能；

@@ -1,0 +1,299 @@
+C51 COMPILER V7.00  Ê_¶_____¶þ¼¶µç»_µ¥_¬»____ò                                             06/25/2010 15:54:34 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE Ê_¶_____¶þ¼¶µç»_µ¥_¬»____ò
+OBJECT MODULE PLACED IN ÊÕ¶Ë¡ª¡ª¶þ¼¶µç»úµ¥Æ¬»ú³ÌÐò.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ÊÕ¶Ë¡ª¡ª¶þ¼¶µç»úµ¥Æ¬»ú³ÌÐò.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include <reg52.h>
+   2          #include <intrins.h>
+   3          
+   4          #define uchar unsigned char 
+   5          #define uint  unsigned int
+   6          
+   7          uchar data Textbuf[2];
+   8          
+   9          sbit LED3=P2^4;
+  10          sbit LED4=P2^5;
+  11          /*######################¼ÓÈëµÄ¶æ»ú³ÌÐò²¿·ÖÒ»########################*/
+  12          sbit out_1=P3^1;
+  13          sbit out_2=P3^0;
+  14          unsigned int PWM_1=0xFA99;   //¶æ»ú1¸³³õÖµ
+  15          unsigned int PWM_2=0xFA99;   //¶æ»ú2¸³³õÖµ
+  16          bit longorshorttimerflag=0;
+  17          bit longorshorttimerflag_2=0;
+  18          unsigned int timerbuf[2]={0};
+  19          
+  20          void delayms(unsigned char ms);
+  21          void refree_allpins();
+  22          
+  23          sbit duoji_1_1=P1^0;
+  24          sbit duoji_1_2=P1^1;
+  25          sbit duoji_2_1=P1^2;
+  26          sbit duoji_2_2=P1^3;
+  27          
+  28          sbit allowchack_flag=P2^2;
+  29          /*######################¶æ»ú²¿·Ö³ÌÐòÒ»¼ÓÈëÍê±Ï####################*/
+  30          
+  31          /*********************Ö±Á÷µç»ú¼ÓÈëµÄµÚÒ»²¿·Ö*********************************/
+  32          sbit motor_1_1=P1^4;//µç»ú1µÄÐÅºÅÒý½Å
+  33          sbit motor_1_2=P1^5;
+  34          sbit motor_2_1=P1^6;//µç»ú2µÄÐÅºÅÒý½Å
+  35          sbit motor_2_2=P1^7;
+  36          
+  37          sbit    motor11=P3^2;
+  38          sbit    motor12=P3^3;
+  39          sbit    motor21=P3^4;
+  40          sbit    motor22=P3^5;
+  41                                          
+  42          /**********************Ö±Á÷µç»ú¼ÓÈëµÄµÚÒ»²¿·Ö½áÊø********************************/
+  43          
+  44          void main()
+  45          {
+  46   1      /*#####################¼ÓÈëµÄ¶æ»ú³ÌÐò²¿·Ö¶þ######################*/
+  47   1          out_1=0;
+  48   1          out_2=0;
+  49   1          TMOD=0x11;
+  50   1          TH0=0xB8;             //1msÑÓÊ±³£Êý 12M
+  51   1          TL0=0x00;            //ÆµÂÊµ÷½Ú
+  52   1      
+  53   1          TH1=0xB8;            //Âö¿íµ÷½Ú//¾Í²îÕâÒ»µãÁË
+  54   1          TL1=0x00;
+  55   1      
+C51 COMPILER V7.00  Ê_¶_____¶þ¼¶µç»_µ¥_¬»____ò                                             06/25/2010 15:54:34 PAGE 2   
+
+  56   1           EA=1;
+  57   1           ET0=1;
+  58   1           ET1=1;    
+  59   1           TR0=1;
+  60   1                TR1=1;
+  61   1      
+  62   1      
+  63   1      /*#####################¶æ»ú²¿·Ö³ÌÐò¶þ¼ÓÈëÍê±Ï#######################*/
+  64   1      
+  65   1      while(1)
+  66   1      {
+  67   2      
+  68   2      while(allowchack_flag==0){
+  69   3      /*##################¼ÓÈëµÄ¶æ»ú³ÌÐò²¿·ÖÈý################################*/
+  70   3      if((duoji_1_1==0)||(duoji_1_2==0)||(duoji_2_1==0)||(duoji_2_2==0)){
+  71   4      
+  72   4                                      if(duoji_2_1==0){
+  73   5                 if(PWM_2<0xFD94){//Ô­À´FBF7
+  74   6                                  PWM_2=PWM_2+30; 
+  75   6                                LED3=1;
+  76   6                                delayms(2);
+  77   6                                }
+  78   5                 else {
+  79   6                                LED3=0;
+  80   6                                } 
+  81   5                }
+  82   4      
+  83   4      
+  84   4                       if(duoji_2_2==0){
+  85   5                 if(PWM_2>0xF93B){
+  86   6                                  PWM_2=PWM_2-30; 
+  87   6                                LED4=1;
+  88   6                                delayms(2);
+  89   6                                }
+  90   5                 else {
+  91   6                                LED4=0;
+  92   6                                } 
+  93   5                }
+  94   4      
+  95   4                      if(duoji_1_1==0){
+  96   5                  if(PWM_1<0xFBF7){
+  97   6                                      PWM_1=PWM_1+30; 
+  98   6                                      LED3=1;
+  99   6                                      delayms(2);
+ 100   6                                      }
+ 101   5                 else {
+ 102   6                                LED3=0;
+ 103   6                                } 
+ 104   5               }//duoji_1_UP//duoji_1_DOWN
+ 105   4      
+ 106   4      
+ 107   4           if(duoji_1_2==0){
+ 108   5                 if(PWM_1>0xF93B){
+ 109   6                                  PWM_1=PWM_1-30; 
+ 110   6                                LED4=1;
+ 111   6                                delayms(2);
+ 112   6                                }
+ 113   5                 else {
+ 114   6                                LED4=0;
+ 115   6                                } 
+ 116   5                }
+ 117   4      
+C51 COMPILER V7.00  Ê_¶_____¶þ¼¶µç»_µ¥_¬»____ò                                             06/25/2010 15:54:34 PAGE 3   
+
+ 118   4      
+ 119   4      
+ 120   4      
+ 121   4      }
+ 122   3      if(allowchack_flag==1)break;
+ 123   3      
+ 124   3      /*################¶æ»ú²¿·Ö³ÌÐòÈý¼ÓÈëÍê±Ï################################*/
+ 125   3      /*******************************Ö±Á÷µç»ú¼ÓÈëµÄµÚ¶þ²¿·Ö*************************/
+ 126   3      if((motor_1_1==1)||(motor_1_2==1)||(motor_2_1==1)||(motor_2_2==1)){
+ 127   4      
+ 128   4      //if(allowchack_flag==1)break;
+ 129   4      
+ 130   4                              if((motor_1_1==1)&&(motor_1_2==0)&&(motor_2_1==1)&&(motor_2_2==0)){
+ 131   5                                      motor11=1;
+ 132   5                                      motor12=0;
+ 133   5                                      motor21=1;
+ 134   5                                      motor22=0;
+ 135   5                              
+ 136   5                              }
+ 137   4      if(allowchack_flag==1)break;    
+ 138   4                      
+ 139   4                              if((motor_1_1==0)&&(motor_1_2==1)&&(motor_2_1==0)&&(motor_2_2==1)){
+ 140   5                                      motor11=0;
+ 141   5                                      motor12=1;
+ 142   5                                      motor21=0;
+ 143   5                                      motor22=1;
+ 144   5                              }
+ 145   4      if(allowchack_flag==1)break;
+ 146   4      
+ 147   4                              if((motor_1_1==0)&&(motor_1_2==1)&&(motor_2_1==1)&&(motor_2_2==0)){
+ 148   5                                      motor11=0;
+ 149   5                                      motor12=1;
+ 150   5                                      motor21=1;
+ 151   5                                      motor22=0;
+ 152   5                              }
+ 153   4      if(allowchack_flag==1)break;
+ 154   4      
+ 155   4                              if((motor_1_1==1)&&(motor_1_2==0)&&(motor_2_1==0)&&(motor_2_2==1)){
+ 156   5                                      motor11=1;
+ 157   5                                      motor12=0;
+ 158   5                                      motor21=0;
+ 159   5                                      motor22=1;
+ 160   5                              }
+ 161   4      if(allowchack_flag==1)break;
+ 162   4      
+ 163   4                              if((motor_1_1==0)&&(motor_1_2==0)&&(motor_2_1==1)&&(motor_2_2==0)){
+ 164   5                                      motor11=0;
+ 165   5                                      motor12=0;
+ 166   5                                      motor21=1;
+ 167   5                                      motor22=0;
+ 168   5                              }
+ 169   4      if(allowchack_flag==1)break;
+ 170   4      
+ 171   4                              if((motor_1_1==1)&&(motor_1_2==0)&&(motor_2_1==0)&&(motor_2_2==0)){
+ 172   5                                      motor11=1;
+ 173   5                                      motor12=0;
+ 174   5                                      motor21=0;
+ 175   5                                      motor22=0;
+ 176   5                              }
+ 177   4              
+ 178   4      }//end of if(motor)
+ 179   3      
+C51 COMPILER V7.00  Ê_¶_____¶þ¼¶µç»_µ¥_¬»____ò                                             06/25/2010 15:54:34 PAGE 4   
+
+ 180   3        
+ 181   3      }//while(allowchack_flag==0)
+ 182   2      /*******************************Ö±Á÷µç»ú¼ÓÈëµÄµÚ¶þ²¿·ÖÍê±Ï********************/
+ 183   2      while(allowchack_flag==1){      
+ 184   3      refree_allpins();       
+ 185   3      }//while(allowchack_flag==1)
+ 186   2      
+ 187   2      }//while(1)
+ 188   1      }
+ 189          
+ 190          /***************************************/
+ 191          void delayms(unsigned char ms) 
+ 192          
+ 193          {
+ 194   1          unsigned char i;
+ 195   1          while(ms--)
+ 196   1           {
+ 197   2              for(i=0;i<120;i++);
+ 198   2           }
+ 199   1      }
+ 200          
+ 201          /*********************************************************/
+ 202          // ¶¨Ê±Æ÷0ÖÐ¶Ï·þÎñ³ÌÐò.(ÓÃÓÚ¶æ»ú1)
+ 203          /*********************************************************/
+ 204          void timer0() interrupt 1 
+ 205          {  
+ 206   1              if(longorshorttimerflag==0){
+ 207   2                      TR0=0;
+ 208   2                              TH0=(PWM_1/256);            //Âö¿íµ÷½Ú
+ 209   2                      TL0=(PWM_1%256);
+ 210   2                       out_1=1;      //Æô¶¯Êä³ö
+ 211   2                               longorshorttimerflag=!longorshorttimerflag;
+ 212   2                               TR0=1;
+ 213   2               }
+ 214   1              else {
+ 215   2                      
+ 216   2                      TR0=0;
+ 217   2                      timerbuf[0]=-0xB800+PWM_1;
+ 218   2                      TH0=timerbuf[0]/256;
+ 219   2                      TL0=timerbuf[0]%256;
+ 220   2                      out_1=0;      //¹Ø±ÕÊä³ö
+ 221   2                      longorshorttimerflag=!longorshorttimerflag;
+ 222   2                      TR0=1;
+ 223   2              }
+ 224   1      }
+ 225          
+ 226          /*********************************************************/
+ 227          // ¶¨Ê±Æ÷1ÖÐ¶Ï·þÎñ³ÌÐò
+ 228          /*********************************************************/
+ 229          void timer1() interrupt 3 
+ 230          { 
+ 231   1              if(longorshorttimerflag_2==0){
+ 232   2                      TR1=0;
+ 233   2                              TH1=(PWM_2/256);            //Âö¿íµ÷½Ú
+ 234   2                      TL1=(PWM_2%256);
+ 235   2                       out_2=1;      //Æô¶¯Êä³ö
+ 236   2                               longorshorttimerflag_2=!longorshorttimerflag_2;
+ 237   2                               TR1=1;
+ 238   2               }
+ 239   1              else {
+ 240   2                      
+ 241   2                      TR1=0;
+C51 COMPILER V7.00  Ê_¶_____¶þ¼¶µç»_µ¥_¬»____ò                                             06/25/2010 15:54:34 PAGE 5   
+
+ 242   2                      timerbuf[1]=-0xB800+PWM_2;
+ 243   2                      TH0=timerbuf[1]/256;
+ 244   2                      TL0=timerbuf[1]%256;
+ 245   2                      out_2=0;      //¹Ø±ÕÊä³ö
+ 246   2                      longorshorttimerflag_2=!longorshorttimerflag_2;
+ 247   2                      TR1=1;
+ 248   2              }
+ 249   1      }
+ 250          /*********************************************************/
+ 251          void refree_allpins(){
+ 252   1      
+ 253   1                          motor11=0;
+ 254   1                                      motor12=0;
+ 255   1                                      motor21=0;
+ 256   1                                      motor22=0;
+ 257   1      
+ 258   1                                      motor_1_1=1;
+ 259   1                                      motor_1_2=1;
+ 260   1                                      motor_2_1=1;
+ 261   1                                      motor_2_2=1;
+ 262   1      
+ 263   1                                      duoji_1_1=1;
+ 264   1                                      duoji_1_2=1;
+ 265   1                                      duoji_2_1=1;
+ 266   1                                      duoji_2_2=1;
+ 267   1      
+ 268   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    521    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

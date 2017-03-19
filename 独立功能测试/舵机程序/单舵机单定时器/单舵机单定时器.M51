@@ -1,0 +1,332 @@
+BL51 BANKED LINKER/LOCATER V5.00                                                        05/28/2010  09:25:55  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE PWMduoji.obj TO 单舵机单定时器 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  PWMduoji.obj (PWMDUOJI)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  单舵机单定时器 (PWMDUOJI)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?PWMDUOJI
+                    0010H     0010H                  *** GAP ***
+            BIT     0020H.0   0000H.2   UNIT         ?BI?PWMDUOJI
+                    0020H.2   0000H.6                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0009H     UNIT         ?PR?REFREE_ALLPINS?PWMDUOJI
+                    0017H     0004H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     0100H     UNIT         ?PR?MAIN?PWMDUOJI
+            CODE    011EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    01AAH     0031H     UNIT         ?PR?TIMER0?PWMDUOJI
+            CODE    01DBH     0031H     UNIT         ?PR?TIMER1?PWMDUOJI
+            CODE    020CH     0013H     UNIT         ?C_INITSEG
+            CODE    021FH     0012H     UNIT         ?PR?_DELAYMS?PWMDUOJI
+
+
+
+OVERLAY MAP OF MODULE:   单舵机单定时器 (PWMDUOJI)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PWMDUOJI
+  +--> ?C_INITSEG
+
+?PR?MAIN?PWMDUOJI
+  +--> ?PR?_DELAYMS?PWMDUOJI
+  +--> ?PR?REFREE_ALLPINS?PWMDUOJI
+
+
+BL51 BANKED LINKER/LOCATER V5.00                                                      05/28/2010  09:25:55  PAGE 2
+
+
+
+SYMBOL TABLE OF MODULE:  单舵机单定时器 (PWMDUOJI)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PWMDUOJI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A0H.3       PUBLIC        K4
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00B0H.4       PUBLIC        T0
+  B:00D0H.6       PUBLIC        AC
+  B:00B0H.5       PUBLIC        T1
+  D:0008H         PUBLIC        PWM_1
+  B:0090H.0       PUBLIC        T2
+  B:00A8H.7       PUBLIC        EA
+  D:000AH         PUBLIC        PWM_2
+  B:00A0H.6       PUBLIC        LED1
+  B:00A0H.7       PUBLIC        LED2
+  B:00A0H.4       PUBLIC        LED3
+  B:00A0H.5       PUBLIC        LED4
+  B:0020H.0       PUBLIC        longorshorttimerflag
+  D:00A8H         PUBLIC        IE
+  B:00C8H.6       PUBLIC        EXF2
+  B:00B0H.7       PUBLIC        RD
+  B:0080H.0       PUBLIC        motor11
+  B:0080H.2       PUBLIC        motor21
+  B:0080H.1       PUBLIC        motor12
+  B:00A8H.4       PUBLIC        ES
+  B:0080H.3       PUBLIC        motor22
+  D:00B8H         PUBLIC        IP
+  B:0098H.0       PUBLIC        RI
+  B:00B0H.2       PUBLIC        INT0
+  B:00D0H.7       PUBLIC        CY
+  B:0098H.1       PUBLIC        TI
+  B:00B0H.3       PUBLIC        INT1
+  B:0020H.1       PUBLIC        longorshorttimerflag_2
+  B:00B8H.4       PUBLIC        PS
+  B:0090H.1       PUBLIC        T2EX
+  B:00D0H.2       PUBLIC        OV
+  C:001EH         PUBLIC        main
+  B:00C8H.1       PUBLIC        C_T2
+  B:00B0H.6       PUBLIC        WR
+  B:00C8H.5       PUBLIC        RCLK
+  B:0080H.4       PUBLIC        motorforward
+  B:00C8H.4       PUBLIC        TCLK
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:0088H.1       PUBLIC        IE0
+  B:0088H.3       PUBLIC        IE1
+  B:00C8H.0       PUBLIC        CP_RL2
+  B:0080H.5       PUBLIC        motorback
+  B:00A8H.1       PUBLIC        ET0
+BL51 BANKED LINKER/LOCATER V5.00                                                      05/28/2010  09:25:55  PAGE 3
+
+
+  B:00A8H.3       PUBLIC        ET1
+  B:0088H.5       PUBLIC        TF0
+  B:00A8H.5       PUBLIC        ET2
+  B:0088H.7       PUBLIC        TF1
+  B:00C8H.7       PUBLIC        TF2
+  B:0098H.2       PUBLIC        RB8
+  D:008CH         PUBLIC        TH0
+  B:0080H.7       PUBLIC        motorrightcircle
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:008DH         PUBLIC        TH1
+  B:0098H.3       PUBLIC        TB8
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  B:00D0H.0       PUBLIC        P
+  B:0098H.7       PUBLIC        SM0
+  D:008AH         PUBLIC        TL0
+  B:0098H.6       PUBLIC        SM1
+  D:008BH         PUBLIC        TL1
+  B:0098H.5       PUBLIC        SM2
+  C:021FH         PUBLIC        _delayms
+  C:01AAH         PUBLIC        timer0
+  B:00B8H.1       PUBLIC        PT0
+  C:01DBH         PUBLIC        timer1
+  C:000EH         PUBLIC        refree_allpins
+  B:00B8H.3       PUBLIC        PT1
+  B:00D0H.3       PUBLIC        RS0
+  B:00A0H.1       PUBLIC        motorright
+  B:00B8H.5       PUBLIC        PT2
+  B:0088H.4       PUBLIC        TR0
+  B:00D0H.4       PUBLIC        RS1
+  B:0088H.6       PUBLIC        TR1
+  B:00C8H.2       PUBLIC        TR2
+  B:00B8H.0       PUBLIC        PX0
+  B:0080H.6       PUBLIC        motorleftcircle
+  B:00B8H.2       PUBLIC        PX1
+  B:00A0H.0       PUBLIC        motorleft
+  D:000CH         PUBLIC        timerbuf
+  B:00C8H.3       PUBLIC        EXEN2
+  B:0098H.4       PUBLIC        REN
+  D:00C8H         PUBLIC        T2CON
+  B:0090H.2       PUBLIC        out_1
+  B:00B0H.4       PUBLIC        out_2
+  B:00B0H.0       PUBLIC        RXD
+  B:00B0H.1       PUBLIC        TXD
+  B:00D0H.5       PUBLIC        F0
+  D:00D0H         PUBLIC        PSW
+  B:00B0H.0       PUBLIC        K1
+  B:00B0H.1       PUBLIC        K2
+  B:00A0H.2       PUBLIC        K3
+  -------         PROC          MAIN
+  C:001EH         LINE#         57
+  C:001EH         LINE#         58
+  C:001EH         LINE#         62
+  C:0020H         LINE#         63
+  C:0022H         LINE#         64
+  C:0025H         LINE#         65
+BL51 BANKED LINKER/LOCATER V5.00                                                      05/28/2010  09:25:55  PAGE 4
+
+
+  C:0028H         LINE#         66
+  C:002BH         LINE#         68
+  C:002EH         LINE#         69
+  C:0030H         LINE#         71
+  C:0032H         LINE#         72
+  C:0034H         LINE#         73
+  C:0036H         LINE#         74
+  C:0038H         LINE#         75
+  C:003AH         LINE#         76
+  C:003AH         LINE#         77
+  C:003AH         LINE#         79
+  C:003CH         LINE#         80
+  C:003EH         LINE#         81
+  C:0040H         LINE#         82
+  C:0042H         LINE#         83
+  C:0044H         LINE#         84
+  C:0046H         LINE#         87
+  C:0049H         LINE#         88
+  C:0063H         LINE#         89
+  C:0065H         LINE#         90
+  C:0065H         LINE#         92
+  C:0068H         LINE#         93
+  C:0082H         LINE#         94
+  C:0084H         LINE#         95
+  C:0084H         LINE#         97
+  C:0087H         LINE#         98
+  C:00A1H         LINE#         99
+  C:00A3H         LINE#         100
+  C:00A3H         LINE#         102
+  C:00A6H         LINE#         103
+  C:00C0H         LINE#         104
+  C:00C2H         LINE#         105
+  C:00C2H         LINE#         107
+  C:00C5H         LINE#         108
+  C:00C7H         LINE#         109
+  C:00C9H         LINE#         110
+  C:00CBH         LINE#         111
+  C:00CDH         LINE#         113
+  C:00CFH         LINE#         115
+  C:00D2H         LINE#         116
+  C:00D4H         LINE#         117
+  C:00D6H         LINE#         118
+  C:00D8H         LINE#         119
+  C:00DAH         LINE#         120
+  C:00DCH         LINE#         122
+  C:00DFH         LINE#         123
+  C:00E1H         LINE#         124
+  C:00E3H         LINE#         125
+  C:00E5H         LINE#         126
+  C:00E7H         LINE#         127
+  C:00E9H         LINE#         129
+  C:00ECH         LINE#         130
+  C:00EEH         LINE#         131
+  C:00F0H         LINE#         132
+  C:00F2H         LINE#         133
+  C:00F4H         LINE#         134
+  C:00F6H         LINE#         136
+BL51 BANKED LINKER/LOCATER V5.00                                                      05/28/2010  09:25:55  PAGE 5
+
+
+  C:00F9H         LINE#         137
+  C:00FBH         LINE#         138
+  C:00FDH         LINE#         139
+  C:00FFH         LINE#         140
+  C:0101H         LINE#         141
+  C:0103H         LINE#         143
+  C:0106H         LINE#         144
+  C:0108H         LINE#         145
+  C:010AH         LINE#         146
+  C:010CH         LINE#         147
+  C:010EH         LINE#         148
+  C:0110H         LINE#         150
+  C:0113H         LINE#         153
+  C:0115H         LINE#         154
+  C:0117H         LINE#         155
+  C:0119H         LINE#         156
+  C:011BH         LINE#         157
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0
+  C:01AAH         LINE#         163
+  C:01AEH         LINE#         165
+  C:01B1H         LINE#         166
+  C:01B3H         LINE#         167
+  C:01B7H         LINE#         168
+  C:01BAH         LINE#         169
+  C:01BCH         LINE#         170
+  C:01BCH         LINE#         171
+  C:01BCH         LINE#         172
+  C:01BEH         LINE#         173
+  C:01BEH         LINE#         175
+  C:01C0H         LINE#         176
+  C:01CBH         LINE#         177
+  C:01CDH         LINE#         178
+  C:01D0H         LINE#         179
+  C:01D2H         LINE#         180
+  C:01D4H         LINE#         181
+  C:01D6H         LINE#         182
+  C:01D6H         LINE#         183
+  -------         ENDPROC       TIMER0
+  -------         PROC          TIMER1
+  C:01DBH         LINE#         188
+  C:01DFH         LINE#         190
+  C:01E2H         LINE#         191
+  C:01E4H         LINE#         192
+  C:01E8H         LINE#         193
+  C:01EBH         LINE#         194
+  C:01EDH         LINE#         195
+  C:01EDH         LINE#         196
+  C:01EDH         LINE#         197
+  C:01EFH         LINE#         198
+  C:01EFH         LINE#         200
+  C:01F1H         LINE#         201
+  C:01FCH         LINE#         202
+  C:01FEH         LINE#         203
+  C:0201H         LINE#         204
+  C:0203H         LINE#         205
+  C:0205H         LINE#         206
+BL51 BANKED LINKER/LOCATER V5.00                                                      05/28/2010  09:25:55  PAGE 6
+
+
+  C:0207H         LINE#         207
+  C:0207H         LINE#         208
+  -------         ENDPROC       TIMER1
+  -------         PROC          _DELAYMS
+  D:0007H         SYMBOL        ms
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:021FH         LINE#         212
+  C:021FH         LINE#         214
+  C:021FH         LINE#         216
+  C:0225H         LINE#         217
+  C:0225H         LINE#         218
+  C:0230H         LINE#         219
+  C:0230H         LINE#         220
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          REFREE_ALLPINS
+  C:000EH         LINE#         223
+  C:000EH         LINE#         225
+  C:0010H         LINE#         226
+  C:0012H         LINE#         227
+  C:0014H         LINE#         228
+  C:0016H         LINE#         230
+  -------         ENDPROC       REFREE_ALLPINS
+  -------         ENDMOD        PWMDUOJI
+
+Program Size: data=17.2 xdata=0 code=549
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

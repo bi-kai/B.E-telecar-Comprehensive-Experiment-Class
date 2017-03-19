@@ -1,0 +1,548 @@
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE Ò____÷___ò
+OBJECT MODULE PLACED IN Ò£¿ØÆ÷³ÌÐò.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Ò£¿ØÆ÷³ÌÐò.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /******************************************************************************************\ 
+   2          ============================================================================================
+   3          * T905.c
+   4          *
+   5          * This file is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTYT; 
+   6          * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   7          *
+   8          *
+   9          * NOTES:
+  10          * This program is for the nRF905 with 232 interface;
+  11          * $write date: 2004.4.7 ;time 11:00$
+  12          * $Revision: 1 $
+  13          *
+  14          /*******************************************************************************************/
+  15          #include <reg52.h>
+  16          #include <intrins.h>
+  17          
+  18          #define uchar unsigned char 
+  19          #define uint  unsigned int
+  20          
+  21          #define WC              0x00                    // Write configuration register command
+  22          #define RC              0x10                    // Read  configuration register command
+  23          #define WTP             0x20                    // Write TX Payload  command
+  24          #define RTP             0x21                    // Read  TX Payload  command
+  25          #define WTA             0x22                    // Write TX Address  command
+  26          #define RTA             0x23                    // Read  TX Address  command
+  27          #define RRP             0x24                    // Read  RX Payload  command
+  28          /*******************************************************************************************/
+  29          typedef struct RFConfig
+  30          {
+  31                  uchar n;
+  32                  uchar buf[10];
+  33          }RFConfig;
+  34          
+  35          code RFConfig RxTxConf={
+  36                  10,
+  37                  0x01, 0x0c, 0x44, 0x20, 0x20, 0xcc, 0xcc, 0xcc,0xcc, 0x58       
+  38          };
+  39          // The content of this struct is nRF905's initialize data.³õÊ¼»¯Êý¾Ý
+  40          // CH_NO=1;433MHZ;Normal Opration,No Retrans;RX,TX Address is 4 Bytes
+  41          // RX TX Payload Width is 32 Bytes;Disable Extern Clock;Fosc=16MHZ
+  42          // 8 Bits CRC And enable
+  43          /*******************************************************************************************/
+  44          uchar data TxBuf[32];
+  45          uchar data RxBuf[32];
+  46          uchar data Textbuf[2];
+  47          uchar key;
+  48          uchar rsbrf;
+  49          uchar delayf;
+  50          //uchar tf;
+  51          /*******************************************************************************************/
+  52          uchar bdata DATA_BUF;
+  53          sbit    flag=DATA_BUF^7;
+  54          sbit    flag1=DATA_BUF^0;
+  55          /*******************************************************************************************/
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 2   
+
+  56          sbit    TX_EN=P1^7;
+  57          sbit    TRX_CE=P1^6;
+  58          sbit    PWR_UP=P1^5;
+  59          sbit    MISO=P1^1;
+  60          sbit    MOSI=P1^0;
+  61          sbit    SCK=P3^7;
+  62          sbit    CSN=P3^3;
+  63          
+  64          sbit    AM=P1^3;//µØÖ·Æ¥Åä
+  65          sbit    DR=P3^2;//½ÓÊÕ»ò·¢ÉäÍê³É
+  66          sbit    CD=P1^4;//ÔØ²¨¼ì²â
+  67          
+  68          sbit LED_workflag=P0^0;
+  69          
+  70          
+  71          
+  72          sbit    KEY1=P2^0;
+  73          sbit    KEY2=P2^1;
+  74          
+  75          sbit    KEY3=P2^2;
+  76          sbit    KEY4=P2^3;
+  77          
+  78          /************ÒÔÏÂÎª¿ØÖÆÖ±Á÷µç»úµÄ°´¼üµÄÒý½Å********************/
+  79          sbit motorforward=P2^4;
+  80          sbit motorback=P2^5;
+  81          sbit motorleftcircle=P2^6;
+  82          sbit motorrightcircle=P2^7;
+  83          sbit motorleft=P0^6;
+  84          sbit motorright=P0^7;
+  85          /*******************************************************************************************/
+  86          void InitIO(void);                      // Initialize IO port
+  87          void Inituart(void);                    // initialize 232 uart
+  88          void Config905(void);                   // Config nRF905 module(×é¼þ¡¢Ä£¿é)ÅäÖÃNRF905Ä£Ê½
+  89          void SetTxMode(void);                   // Set nRF905 in Tx mode
+  90          void SetRxMode(void);                   // Set nRF905 in Rx mode
+  91          void TxPacket(void);                    // Send data by nRF905
+  92          void RxPacket(void);                    // Recive data by nRF905
+  93          void SpiWrite(uchar);                   // Write data to nRF905
+  94          uchar SpiRead(void);                    // Read data to nRF905
+  95          void Delay(uchar n);                    // Delay 100us
+  96          void Scankey(void);                             // Scan key
+  97          void TxData (uchar x);                  // Send key_value to CRT display
+  98          void comdebug(void);
+  99          void send(unsigned char str[]);
+ 100          /*******************************************************************************************/
+ 101          void Delay(uchar n)
+ 102          {
+ 103   1              uint i;
+ 104   1              while(n--)
+ 105   1              for(i=0;i<80;i++);      
+ 106   1      }
+ 107          
+ 108          void main()
+ 109          {
+ 110   1      
+ 111   1          //================NRF905³õÊ¼»¯
+ 112   1              CSN=1;                                          // Spi  disable                                         
+ 113   1              SCK=0;                                          // Spi clock line init high
+ 114   1              DR=1;                                           // Init DR for input
+ 115   1              AM=1;                                           // Init AM for input
+ 116   1              PWR_UP=1;                                       // nRF905 power on
+ 117   1              TRX_CE=0;                                       // Set nRF905 in standby mode
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 3   
+
+ 118   1              TX_EN=0;                                        // set radio in Rx mode 
+ 119   1      
+ 120   1              //================
+ 121   1              Config905();                            // Config nRF905 module
+ 122   1      
+ 123   1      
+ 124   1      /******************¼ÓÈë´®¿Ú********************************************/
+ 125   1              SCON=0x50;//´®¿Ú·½Ê½1£¬ÔÊÐí½ÓÊÕ
+ 126   1         TMOD=0x20;//¶¨Ê±Æ÷1£¬¶¨Ê±·½Ê½2
+ 127   1         TCON=0x40;//Éè¶¨Ê±Æ÷1¿ªÊ¼¼ÆÊý
+ 128   1         TH1=0xE8;//11.0592MHz, 1200²¨ÌØÂÊ
+ 129   1         TL1=0xE8;
+ 130   1         TI=1;
+ 131   1         TR1=1;
+ 132   1      //send("before while(1).\n");
+ 133   1      /******************´®¿Ú¼ÓÈë½áÊø********************************************/
+ 134   1      
+ 135   1              TxBuf[0]=0xff;
+ 136   1              TxBuf[1]=0xff;
+ 137   1              TxBuf[2]=0xff;
+ 138   1              TxBuf[3]=0xff;
+ 139   1      while(1)
+ 140   1      {
+ 141   2      //LED_workflag=!LED_workflag;
+ 142   2      LED_workflag=!LED_workflag;
+ 143   2      
+ 144   2      
+ 145   2      motorforward=1;
+ 146   2      motorback=1;
+ 147   2      motorleftcircle=1;
+ 148   2      motorrightcircle=1;
+ 149   2      motorleft=1;
+ 150   2      motorright=1;
+ 151   2      
+ 152   2      
+ 153   2              if(KEY1==0){
+ 154   3                                         TxBuf[0]=1;
+ 155   3                                              while(KEY1==0){
+ 156   4                                                       Delay(1);
+ 157   4                                                       TxBuf[0]=1;
+ 158   4                                                       SetTxMode();
+ 159   4                                                       TxPacket();
+ 160   4                                                       send("In KEY1 while.");
+ 161   4                                                       }
+ 162   3                              
+ 163   3                              Delay(1);
+ 164   3                              TxBuf[0]=0xff;
+ 165   3                              TxBuf[1]=0xff;
+ 166   3      //                      TxBuf[2]=0xff;
+ 167   3      //                      TxBuf[3]=0xff;
+ 168   3                              send("out of KEY1 while.");
+ 169   3                              SetTxMode();                            // Set Tx Mode
+ 170   3                         TxPacket();          // Transmit Tx buffer data
+ 171   3                                              }
+ 172   2      
+ 173   2      
+ 174   2              if(KEY2==0){
+ 175   3                     TxBuf[1]=1;
+ 176   3                                              while(KEY2==0){
+ 177   4                                                       Delay(1);
+ 178   4                                                       TxBuf[1]=1;
+ 179   4                                                       SetTxMode();
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 4   
+
+ 180   4                                                       TxPacket();
+ 181   4                                                        send("In KEY2 while.");
+ 182   4                                                       }
+ 183   3                              
+ 184   3                              Delay(1);
+ 185   3                              TxBuf[0]=0xff;
+ 186   3                              TxBuf[1]=0xff;
+ 187   3      //                      TxBuf[2]=0xff;
+ 188   3      //                      TxBuf[3]=0xff;
+ 189   3                              send("out of KEY2 while.");
+ 190   3                              SetTxMode();                            // Set Tx Mode
+ 191   3                         TxPacket();          // Transmit Tx buffer data
+ 192   3                                              }
+ 193   2      
+ 194   2              if(KEY3==0){
+ 195   3                     TxBuf[2]=1;
+ 196   3                                              while(KEY3==0){
+ 197   4                                                       Delay(1);
+ 198   4                                                       TxBuf[2]=1;
+ 199   4                                                       SetTxMode();
+ 200   4                                                       TxPacket();
+ 201   4                                                        send("In KEY3 while.");
+ 202   4                                                       }
+ 203   3                      
+ 204   3                              Delay(1);
+ 205   3      //                      TxBuf[0]=0xff;
+ 206   3      //                      TxBuf[1]=0xff;
+ 207   3                              TxBuf[2]=0xff;
+ 208   3                              TxBuf[3]=0xff;
+ 209   3                              send("out of KEY3 while.");
+ 210   3                              SetTxMode();                            // Set Tx Mode
+ 211   3                         TxPacket();          // Transmit Tx buffer data
+ 212   3                                              }
+ 213   2      
+ 214   2      
+ 215   2              if(KEY4==0){
+ 216   3                     TxBuf[3]=1;
+ 217   3                                              while(KEY4==0){
+ 218   4                                                       Delay(1);
+ 219   4                                                       TxBuf[3]=1;
+ 220   4                                                       SetTxMode();
+ 221   4                                                       TxPacket();
+ 222   4                                                        send("In KEY4 while.");
+ 223   4                                                       }
+ 224   3                      
+ 225   3                              Delay(1);
+ 226   3      //                      TxBuf[0]=0xff;
+ 227   3      //                      TxBuf[1]=0xff;
+ 228   3                              TxBuf[2]=0xff;
+ 229   3                              TxBuf[3]=0xff;
+ 230   3                              send("out of KEY4 while.");
+ 231   3                              SetTxMode();                            // Set Tx Mode
+ 232   3                         TxPacket();          // Transmit Tx buffer data
+ 233   3                                              }
+ 234   2      
+ 235   2      
+ 236   2      /******************¿ØÖÆÖ±Á÷µç»úµÄ°´¼üµÄÅÐ¶Ï£¬¼ÓÈëµÄµÚ¶þ²¿·Ö***************************/
+ 237   2      if(motorforward==0){
+ 238   3                                         TxBuf[4]=1;
+ 239   3                                              while(motorforward==0){
+ 240   4                                                       Delay(1);
+ 241   4                                                       TxBuf[4]=1;
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 5   
+
+ 242   4                                                       SetTxMode();
+ 243   4                                                       TxPacket();
+ 244   4                                                       send("In KEY1 while.");
+ 245   4                                                       }
+ 246   3                      
+ 247   3                              Delay(1);
+ 248   3                              TxBuf[4]=0xff;
+ 249   3      //                      TxBuf[1]=0xff;
+ 250   3      //                      TxBuf[2]=0xff;
+ 251   3      //                      TxBuf[3]=0xff;
+ 252   3                              send("out of KEY1 while.");
+ 253   3                              SetTxMode();                            // Set Tx Mode
+ 254   3                         TxPacket();          // Transmit Tx buffer data
+ 255   3                                              }
+ 256   2      
+ 257   2      if(motorback==0){
+ 258   3                                         TxBuf[5]=1;
+ 259   3                                              while(motorback==0){
+ 260   4                                                       Delay(1);
+ 261   4                                                       TxBuf[5]=1;
+ 262   4                                                       SetTxMode();
+ 263   4                                                       TxPacket();
+ 264   4                                                       send("In KEY1 while.");
+ 265   4                                                       }
+ 266   3                      
+ 267   3                              Delay(1);
+ 268   3                              TxBuf[5]=0xff;
+ 269   3      //                      TxBuf[1]=0xff;
+ 270   3      //                      TxBuf[2]=0xff;
+ 271   3      //                      TxBuf[3]=0xff;
+ 272   3                              send("out of KEY1 while.");
+ 273   3                              SetTxMode();                            // Set Tx Mode
+ 274   3                         TxPacket();          // Transmit Tx buffer data
+ 275   3                                              }
+ 276   2      
+ 277   2      
+ 278   2      if(motorleftcircle==0){
+ 279   3                                         TxBuf[6]=1;
+ 280   3                                              while(motorleftcircle==0){
+ 281   4                                                       Delay(1);
+ 282   4                                                       TxBuf[6]=1;
+ 283   4                                                       SetTxMode();
+ 284   4                                                       TxPacket();
+ 285   4                                                       send("In KEY1 while.");
+ 286   4                                                       }
+ 287   3                      
+ 288   3                              Delay(1);
+ 289   3                              TxBuf[6]=0xff;
+ 290   3      //                      TxBuf[1]=0xff;
+ 291   3      //                      TxBuf[2]=0xff;
+ 292   3      //                      TxBuf[3]=0xff;
+ 293   3                              send("out of KEY1 while.");
+ 294   3                              SetTxMode();                            // Set Tx Mode
+ 295   3                         TxPacket();          // Transmit Tx buffer data
+ 296   3                                              }
+ 297   2      
+ 298   2      if(motorrightcircle==0){
+ 299   3                                         TxBuf[7]=1;
+ 300   3                                              while(motorrightcircle==0){
+ 301   4                                                       Delay(1);
+ 302   4                                                       TxBuf[7]=1;
+ 303   4                                                       SetTxMode();
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 6   
+
+ 304   4                                                       TxPacket();
+ 305   4                                                       send("In KEY1 while.");
+ 306   4                                                       }
+ 307   3                      
+ 308   3                              Delay(1);
+ 309   3                              TxBuf[7]=0xff;
+ 310   3      //                      TxBuf[1]=0xff;
+ 311   3      //                      TxBuf[2]=0xff;
+ 312   3      //                      TxBuf[3]=0xff;
+ 313   3                              send("out of KEY1 while.");
+ 314   3                              SetTxMode();                            // Set Tx Mode
+ 315   3                         TxPacket();          // Transmit Tx buffer data
+ 316   3                                              }
+ 317   2      
+ 318   2      if(motorleft==0){
+ 319   3                                         TxBuf[8]=1;
+ 320   3                                              while(motorleft==0){
+ 321   4                                                       Delay(1);
+ 322   4                                                       TxBuf[8]=1;
+ 323   4                                                       SetTxMode();
+ 324   4                                                       TxPacket();
+ 325   4                                                       send("In KEY1 while.");
+ 326   4                                                       }
+ 327   3                      
+ 328   3                              Delay(1);
+ 329   3                              TxBuf[8]=0xff;
+ 330   3      //                      TxBuf[1]=0xff;
+ 331   3      //                      TxBuf[2]=0xff;
+ 332   3      //                      TxBuf[3]=0xff;
+ 333   3                              send("out of KEY1 while.");
+ 334   3                              SetTxMode();                            // Set Tx Mode
+ 335   3                         TxPacket();          // Transmit Tx buffer data
+ 336   3                                              }
+ 337   2      
+ 338   2      
+ 339   2      if(motorright==0){
+ 340   3                                         TxBuf[9]=1;
+ 341   3                                              while(motorright==0){
+ 342   4                                                       Delay(1);
+ 343   4                                                       TxBuf[9]=1;
+ 344   4                                                       SetTxMode();
+ 345   4                                                       TxPacket();
+ 346   4                                                       send("In KEY1 while.");
+ 347   4                                                       }
+ 348   3                      
+ 349   3                              Delay(1);
+ 350   3                              TxBuf[9]=0xff;
+ 351   3      //                      TxBuf[1]=0xff;
+ 352   3      //                      TxBuf[2]=0xff;
+ 353   3      //                      TxBuf[3]=0xff;
+ 354   3                              send("out of KEY1 while.");
+ 355   3                              SetTxMode();                            // Set Tx Mode
+ 356   3                         TxPacket();          // Transmit Tx buffer data
+ 357   3                                              }
+ 358   2      
+ 359   2      /**********************¿ØÖÆÖ±Á÷µç»úµÄ°´¼üµÄÅÐ¶Ï£¬¼ÓÈëµÄµÚ¶þ²¿·Ö½áÊø**********************/
+ 360   2      
+ 361   2                       Delay(1);
+ 362   2                      SetRxMode();                    // Set nRF905 in Rx mode
+ 363   2                 if (DR){                     // If recive data ready... 
+ 364   3                 RxPacket();                  // ... recive data
+ 365   3                      send("waiting for receive......\n");}
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 7   
+
+ 366   2      }
+ 367   1      
+ 368   1      }
+ 369          /*******************************************************************************************/
+ 370          /*******************************************************************************************/
+ 371          //function Config905();
+ 372          /*******************************************************************************************/
+ 373          void Config905(void)
+ 374          {
+ 375   1              uchar i;                                        
+ 376   1              CSN=0;                                          // Spi enable for write a spi command
+ 377   1              SpiWrite(WC);                           // Write config commandÐ´·ÅÅäÖÃÃüÁî
+ 378   1              for (i=0;i<RxTxConf.n;i++)      // Write configration words  Ð´·ÅÅäÖÃ×Ö
+ 379   1              {
+ 380   2                      SpiWrite(RxTxConf.buf[i]);
+ 381   2              }
+ 382   1              CSN=1;                                          // Disable Spi
+ 383   1      }
+ 384          /*******************************************************************************************/
+ 385          //function SpiWrite();
+ 386          /*******************************************************************************************/
+ 387          void SpiWrite(uchar  byte)
+ 388          {
+ 389   1              uchar i;        
+ 390   1              DATA_BUF=byte;                          // Put function's parameter into a bdata variable               
+ 391   1              for (i=0;i<8;i++)                       // Setup byte circulation bits
+ 392   1              {       
+ 393   2                      
+ 394   2                      if (flag)                               // Put DATA_BUF.7 on data line
+ 395   2                              MOSI=1;
+ 396   2                      else
+ 397   2                              MOSI=0;
+ 398   2                      SCK=1;                                  // Set clock line high
+ 399   2                      DATA_BUF=DATA_BUF<<1;   // Shift DATA_BUF
+ 400   2                      SCK=0;                                  // Set clock line low 
+ 401   2              }       
+ 402   1      }
+ 403          /*******************************************************************************************/
+ 404          //function SpiRead();
+ 405          /*******************************************************************************************/
+ 406          uchar SpiRead(void)
+ 407          {
+ 408   1              uchar i;        
+ 409   1              for (i=0;i<8;i++)                       // Setup byte circulation bits
+ 410   1              {       
+ 411   2                      DATA_BUF=DATA_BUF<<1;   // Right shift DATA_BUF
+ 412   2                      SCK=1;                                  // Set clock line high
+ 413   2                      if (MISO)
+ 414   2                              flag1=1;                        // Read data
+ 415   2                      else
+ 416   2                              flag1=0;
+ 417   2                                                              
+ 418   2                      
+ 419   2                      SCK=0;                                  // Set clock line low
+ 420   2              }
+ 421   1              return DATA_BUF;                        // Return function parameter
+ 422   1      }
+ 423          /*******************************************************************************************/
+ 424          //function TxPacket();
+ 425          /*******************************************************************************************/
+ 426          void TxPacket(void)
+ 427          {
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 8   
+
+ 428   1              uchar i;
+ 429   1              //Config905();                          
+ 430   1              CSN=0;                                          // Spi enable for write a spi command   
+ 431   1              SpiWrite(WTP);                          // Write payload command
+ 432   1              for (i=0;i<32;i++)
+ 433   1              {
+ 434   2                      SpiWrite(TxBuf[i]);             // Write 32 bytes Tx data
+ 435   2              }
+ 436   1              CSN=1;                                          // Spi disable                                          
+ 437   1              Delay(1);
+ 438   1              CSN=0;                                          // Spi enable for write a spi command   
+ 439   1              SpiWrite(WTA);                          // Write address command
+ 440   1              for (i=0;i<4;i++)                       // Write 4 bytes address
+ 441   1              {
+ 442   2                      SpiWrite(RxTxConf.buf[i+5]);
+ 443   2              }       
+ 444   1              CSN=1;                                          // Spi disable
+ 445   1              TRX_CE=1;                                       // Set TRX_CE high,start Tx data transmission
+ 446   1              Delay(1);                                       // while (DR!=1);
+ 447   1              TRX_CE=0;                                       // Set TRX_CE low
+ 448   1      }
+ 449          /*******************************************************************************************/
+ 450          //function RxPacket();
+ 451          /*******************************************************************************************/
+ 452          void RxPacket(void)
+ 453          {
+ 454   1              uchar i;        
+ 455   1              TRX_CE=0;                                       // Set nRF905 in standby mode   
+ 456   1              CSN=0;                                          // Spi enable for write a spi command
+ 457   1              SpiWrite(RRP);                          // Read payload command 
+ 458   1              for (i=0;i<32;i++)
+ 459   1              {
+ 460   2                      RxBuf[i]=SpiRead();             // Read data and save to buffer         
+ 461   2              }
+ 462   1              CSN=1;                                          // Disable spi
+ 463   1              while(DR||AM);  
+ 464   1      //      P0=     RxBuf[0];                               // Buffer[0] output from P0 port...
+ 465   1              TRX_CE=1;
+ 466   1              //xx=(RxBuf[0]>>4)&0x0f;
+ 467   1              //TxData(xx);
+ 468   1               //=====================
+ 469   1      //         if(RxBuf[0] == 1) LED1 = 0 ;
+ 470   1      //         if(RxBuf[1] == 1) LED2 = 0 ;
+ 471   1                
+ 472   1      //      Delay(500);                                     // ...light led
+ 473   1      //      P0=0xff;                                        // Close led
+ 474   1       //     LED1 = 1 ;
+ 475   1      //        LED2 = 1 ;                                                            
+ 476   1      }
+ 477          /*******************************************************************************************/
+ 478          //function SetTxMode();
+ 479          /*******************************************************************************************/
+ 480          void SetTxMode(void)                            
+ 481          {       
+ 482   1              TX_EN=1;
+ 483   1              TRX_CE=0;
+ 484   1              Delay(1);                                       // delay for mode change(>=650us)
+ 485   1      }                               
+ 486          /*******************************************************************************************/
+ 487          //function SetRxMode();
+ 488          /*******************************************************************************************/
+ 489          void SetRxMode(void)
+C51 COMPILER V7.00  Ò____÷___ò                                                             06/25/2010 16:08:48 PAGE 9   
+
+ 490          {
+ 491   1              TX_EN=0;
+ 492   1              TRX_CE=1;
+ 493   1              Delay(1);                                       // delay for mode change(>=650us)                               
+ 494   1      }
+ 495          
+ 496          void send(unsigned char str[])
+ 497          {
+ 498   1              unsigned int i=0;
+ 499   1              while(str[i]!='\0')
+ 500   1              {
+ 501   2                      SBUF=str[i];
+ 502   2                      while(!TI);
+ 503   2                      TI=0;
+ 504   2                      i++;
+ 505   2                      }
+ 506   1      }
+ 507          
+ 508          
+ 509          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    911    ----
+   CONSTANT SIZE    =    174    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     70       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

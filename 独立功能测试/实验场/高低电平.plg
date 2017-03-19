@@ -1,0 +1,1048 @@
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(197): 警告 C206: 'refree_allpins': missing function-prototype
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+高低电平.C(500): 错误 C231: 'refree_allpins': redefinition
+高低电平.C(507): 错误 C231: 'refree_allpins': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(197): 警告 C206: 'refree_allpins': missing function-prototype
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(288): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+高低电平.C(500): 错误 C231: 'refree_allpins': redefinition
+高低电平.C(507): 错误 C231: 'refree_allpins': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(197): 警告 C206: 'refree_allpins': missing function-prototype
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+高低电平.C(500): 错误 C231: 'refree_allpins': redefinition
+高低电平.C(507): 错误 C231: 'refree_allpins': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(197): 警告 C206: 'refree_allpins': missing function-prototype
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+高低电平.C(500): 错误 C231: 'refree_allpins': redefinition
+高低电平.C(507): 错误 C231: 'refree_allpins': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(197): 警告 C206: 'refree_allpins': missing function-prototype
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+高低电平.C(500): 错误 C231: 'refree_allpins': redefinition
+高低电平.C(507): 错误 C231: 'refree_allpins': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(197): 警告 C206: 'refree_allpins': missing function-prototype
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+高低电平.C(500): 错误 C231: 'refree_allpins': redefinition
+高低电平.C(507): 错误 C231: 'refree_allpins': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+目标没产生
+建造目标 '目标 1'
+正在编绎 高低电平.c... 
+高低电平.C(223): 错误 C141: syntax error near 'if'
+高低电平.C(223): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(224): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(225): 错误 C141: syntax error near '}'
+高低电平.C(227): 错误 C279: 'duoji_2_up': multiple initialization
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(227): 错误 C231: 'duoji_2_up': redefinition
+高低电平.C(228): 错误 C141: syntax error near '}'
+高低电平.C(231): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(232): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(233): 错误 C141: syntax error near '}'
+高低电平.C(235): 错误 C279: 'duoji_2_down': multiple initialization
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(235): 错误 C231: 'duoji_2_down': redefinition
+高低电平.C(236): 错误 C141: syntax error near '}'
+高低电平.C(241): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(242): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(243): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(244): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(245): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(246): 错误 C141: syntax error near '}'
+高低电平.C(248): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(249): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(249): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(250): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(250): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(251): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(251): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(252): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(252): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(253): 错误 C141: syntax error near '}'
+高低电平.C(255): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(256): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(256): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(257): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(257): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(258): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(258): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(259): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(259): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(260): 错误 C141: syntax error near '}'
+高低电平.C(262): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(263): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(263): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(264): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(264): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(265): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(265): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(266): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(266): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(267): 错误 C141: syntax error near '}'
+高低电平.C(269): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(270): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(270): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(271): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(271): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(272): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(272): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(273): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(273): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(274): 错误 C141: syntax error near '}'
+高低电平.C(276): 错误 C141: syntax error near '==', expected ')'
+高低电平.C(277): 错误 C279: 'motor_1_1': multiple initialization
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(277): 错误 C231: 'motor_1_1': redefinition
+高低电平.C(278): 错误 C279: 'motor_1_2': multiple initialization
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(278): 错误 C231: 'motor_1_2': redefinition
+高低电平.C(279): 错误 C279: 'motor_2_1': multiple initialization
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(279): 错误 C231: 'motor_2_1': redefinition
+高低电平.C(280): 错误 C279: 'motor_2_2': multiple initialization
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(280): 错误 C231: 'motor_2_2': redefinition
+高低电平.C(281): 错误 C141: syntax error near '}'
+高低电平.C(283): 错误 C141: syntax error near '10'
+高低电平.C(286): 错误 C141: syntax error near '}'
+高低电平.C(442): 错误 C231: '_delayms': redefinition
+目标没产生

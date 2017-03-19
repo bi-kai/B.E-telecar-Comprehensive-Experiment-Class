@@ -1,0 +1,175 @@
+C51 COMPILER V7.00  ADDAMCU                                                                06/24/2010 18:25:50 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE ADDAMCU
+OBJECT MODULE PLACED IN ADDAMCU.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ADDAMCU.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include < reg52.h >
+   2          #include < intrins.h >
+   3          
+   4          #define uchar unsigned char
+   5          #define uint  unsigned int
+   6          
+   7          /*******************************定义全局变量********************************/
+   8          unsigned char dat=0x00 ;      //AD值
+   9          
+  10          unsigned char channel;       //通道变量
+  11          //ADC0832的引脚
+  12          sbit AD1_CS =P3^6;  //ADC0832 chip seclect
+  13          sbit AD1_DI =P3^4;  //ADC0832 k in
+  14          sbit AD1_DO =P3^4;  //ADC0832 k out
+  15          sbit AD1_CLK=P3^5; //ADC0832 clock signal
+  16          
+  17          unsigned char data  temp_data1_[2] = {0x00,0x00} ;
+  18          //unsigned char data  display1_[5] =   {0x00,0x00,0x00,0x00,0x00} ;
+  19          //unsigned char code  ditab[16] =    {0x00,0x01,0x01,0x02,0x03,0x03,0x04,0x04,0x05,0x06,0x06,0x07,0x08,0x0
+             -8,0x09,0x09} ;/*小数位表，四舍五入*/
+  20          
+  21          
+  22          /**************加入的第一部分************************/
+  23          sbit ADC_0=P0^0;
+  24          sbit ADC_1=P0^1;
+  25          sbit ADC_2=P0^2;
+  26          sbit ADC_3=P0^3;
+  27          sbit ADC_4=P0^4;
+  28          sbit ADC_5=P0^5;
+  29          sbit ADC_6=P0^6;
+  30          sbit ADC_7=P0^7;
+  31          
+  32          sbit ADC_work_LED_flag=P2^6;
+  33          uchar channel=2;
+  34          /**************加入的第一部分，结束*******************/
+  35          /*******************************************************************
+  36          void delay1(int ms)//延迟函数
+  37          
+  38          { unsigned char y ;
+  39            while(ms--)
+  40            {
+  41            for(y = 0 ; y<250 ; y++)
+  42            {
+  43             _nop_() ;
+  44             _nop_() ;
+  45             _nop_() ;
+  46             _nop_() ;
+  47            }
+  48            }
+  49           }
+  50          /**********************************************************************/
+  51           unsigned int Adc1_0832()     //AD转换，返回结果
+  52          {
+  53   1      
+  54   1          uchar i=0;
+C51 COMPILER V7.00  ADDAMCU                                                                06/24/2010 18:25:50 PAGE 2   
+
+  55   1          uchar j;
+  56   1          uint dat=0;
+  57   1          uchar ndat=0;
+  58   1          AD1_DI=1;
+  59   1          _nop_();
+  60   1          _nop_();
+  61   1          AD1_CS=0;//拉低CS端
+  62   1          _nop_();
+  63   1          _nop_();
+  64   1          AD1_CLK=1;//拉高CLK端
+  65   1          _nop_();
+  66   1          _nop_();
+  67   1          AD1_CLK=0;//拉低CLK端,形成下降沿1
+  68   1          _nop_();
+  69   1          _nop_();
+  70   1          AD1_CLK=1;//拉高CLK端
+  71   1          AD1_DI=channel&0x1; //通道0
+  72   1          _nop_();
+  73   1          _nop_();
+  74   1          AD1_CLK=0;//拉低CLK端,形成下降沿2
+  75   1          _nop_();
+  76   1          _nop_();
+  77   1          AD1_CLK=1;//拉高CLK端
+  78   1          AD1_DI=(channel>>1)&0x1;//选通道    1
+  79   1          _nop_();
+  80   1          _nop_();
+  81   1          AD1_CLK=0;//拉低CLK端,形成下降沿3
+  82   1          AD1_DI=1;//控制命令结束 
+  83   1          _nop_();
+  84   1          _nop_();
+  85   1          dat=0;
+  86   1          for(i=0;i<8;i++)
+  87   1          {
+  88   2              dat|=AD1_DO;//收数据
+  89   2              AD1_CLK=1;
+  90   2              _nop_();
+  91   2              _nop_();
+  92   2              AD1_CLK=0;//形成一次时钟脉冲
+  93   2              _nop_();
+  94   2              _nop_();
+  95   2              dat<<=1;
+  96   2              if(i==7)dat|=AD1_DO;
+  97   2          }  
+  98   1          for(i=0;i<8;i++)
+  99   1          {
+ 100   2              j=0;
+ 101   2              j=j|AD1_DO;//收数据
+ 102   2              AD1_CLK=1;
+ 103   2              _nop_();
+ 104   2              _nop_();
+ 105   2              AD1_CLK=0;//形成一次时钟脉冲
+ 106   2              _nop_();
+ 107   2              _nop_();
+ 108   2              j=j<<7;
+ 109   2              ndat=ndat|j;
+ 110   2              if(i<7)ndat>>=1;
+ 111   2          }
+ 112   1          AD1_CS=1;//拉低CS端
+ 113   1          AD1_CLK=0;//拉低CLK端
+ 114   1          AD1_DO=1;//拉高数据端,回到初始状态
+ 115   1          dat<<=8;
+ 116   1          dat|=ndat;
+C51 COMPILER V7.00  ADDAMCU                                                                06/24/2010 18:25:50 PAGE 3   
+
+ 117   1          return(dat);            //return ad k
+ 118   1      }
+ 119          
+ 120            void main()
+ 121            { 
+ 122   1              while(1) {  
+ 123   2                      /******************************/
+ 124   2      //              ADC_work_LED_flag=!ADC_work_LED_flag;   
+ 125   2                      /*****************************/ 
+ 126   2      
+ 127   2                      temp_data1_[0] =  Adc1_0832();   //低8位
+ 128   2      
+ 129   2      /**************加入的第二部分*****************************/
+ 130   2      //               ADC_0=temp_data1_[0]^7;// 用于两个单片机八个引脚传数据，此处只用P0=Adc1_0832();就行了
+ 131   2      //               ADC_1=temp_data1_[0]^6;
+ 132   2      //               ADC_2=temp_data1_[0]^5;
+ 133   2      //               ADC_3=temp_data1_[0]^4;
+ 134   2      //               ADC_4=temp_data1_[0]^3;
+ 135   2      //               ADC_5=temp_data1_[0]^2;
+ 136   2      //               ADC_6=temp_data1_[0]^1;
+ 137   2      //               ADC_7=temp_data1_[0]^0;
+ 138   2                                       
+ 139   2      //              P0=Adc1_0832();
+ 140   2                      P0=temp_data1_[0];
+ 141   2                      
+ 142   2      /**************加入的第二部分，结束************************/
+ 143   2               }
+ 144   1              }
+ 145          
+ 146          
+ 147          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    142    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

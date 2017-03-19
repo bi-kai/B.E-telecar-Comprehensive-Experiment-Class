@@ -1,0 +1,197 @@
+C51 COMPILER V7.00  PWMDUOJI                                                               05/29/2010 00:33:39 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE PWMDUOJI
+OBJECT MODULE PLACED IN PWMduoji.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE PWMduoji.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /*******************************************************************/
+   2          
+   3          // 利用定时器控制产生占空比可变的 PWM 波
+   4          // 按K1，PWM值增加，则占空比减小,LED 灯渐暗。
+   5          // 按K2，PWM值减小，则占空比增加,LED 灯渐亮。
+   6          // 当PWM值增加到最大值或减小到最小值时，蜂鸣器将报警。
+   7          // 为了看到蜂鸣器的效果，可以使用杜邦线把蜂鸣器引到其它接口上
+   8          //因为蜂鸣器和小灯L4共用一P1.3口，所以按键按下时L4会比其它亮
+   9          //SW17是亮度增加键 SW16是亮度减小键
+  10          
+  11          /*********************************************************/
+  12          
+  13          #include < reg52.h >
+  14          #include < intrins.h >
+  15          
+  16          sbit  K1=P3^0;                    //增加键
+  17          sbit  K2=P3^1;                    //减少键
+  18          sbit  LED1=P2^6;                
+  19          sbit  LED2=P2^7;
+  20          
+  21          sbit  K3=P2^2;
+  22          sbit  K4=P2^3;
+  23          sbit  LED3=P2^4; 
+  24          sbit  LED4=P2^5; 
+  25          
+  26          sbit out_1=P1^2;
+  27          sbit out_2=P3^4;
+  28          
+  29          unsigned int PWM_1=0xFA99;   //舵机1赋初值
+  30          unsigned int PWM_2=0xFA99;   //舵机2赋初值
+  31          
+  32          bit longorshorttimerflag=0;
+  33          bit longorshorttimerflag_2=0;
+  34          unsigned int timerbuf[2]={0};
+  35          
+  36          void delayms(unsigned char ms);
+  37          
+  38          /********以下为直流电机控制按键的定义*****************/
+  39          sbit motor11=P1^0;//电机1的信号引脚
+  40          sbit motor12=P1^1;
+  41          
+  42          sbit motor21=P1^2;//电机2的信号引脚
+  43          sbit motor33=P1^3;
+  44          
+  45          sbit motorforward=P1^4;
+  46          sbit motorback=P1^5;
+  47          sbit motorleftcircle=P1^6;
+  48          sbit motorrightcircle=P1^7;
+  49          sbit motorleft=P2^0;
+  50          sbit motorright=P2^1;
+  51          
+  52          
+  53          
+  54          
+  55          
+C51 COMPILER V7.00  PWMDUOJI                                                               05/29/2010 00:33:39 PAGE 2   
+
+  56          /*********************************************************/
+  57          void main()
+  58          {  
+  59   1      
+  60   1      /****************************************/
+  61   1      
+  62   1           out_1=0;
+  63   1                out_2=0;
+  64   1          TMOD=0x11;
+  65   1          TH0=0xB8;             //1ms延时常数 12M
+  66   1          TL0=0x00;            //频率调节
+  67   1      
+  68   1          TH1=0xB8;            //脉宽调节//就差这一点了
+  69   1          TL1=0x00;
+  70   1      
+  71   1           EA=1;
+  72   1           ET0=1;
+  73   1           ET1=1;    
+  74   1           TR0=1;
+  75   1                TR1=1;
+  76   1         while(1)
+  77   1         {
+  78   2           if(K1==0){
+  79   3                  if(PWM_1<0xFBF7){PWM_1++;delayms(2);}
+  80   3                 else {LED1=0;} 
+  81   3               };
+  82   2      
+  83   2           if(K2==0){
+  84   3                 if(PWM_1>0xF93B){PWM_1--;delayms(2);}
+  85   3                 else {LED2=0;} 
+  86   3                };
+  87   2      
+  88   2                                if(K3==0){
+  89   3                  if(PWM_2<0xFF91){PWM_2++;delayms(2);}
+  90   3                                      else {LED3=0;}
+  91   3               };
+  92   2      
+  93   2                               if(K4==0){
+  94   3                  if(PWM_2>0xF91B){PWM_2--;delayms(2);}//原来是0xF93B
+  95   3                 else {LED4=0;} 
+  96   3               };
+  97   2                      
+  98   2      
+  99   2                LED1=1;
+ 100   2                LED2=1;
+ 101   2                LED3=1;
+ 102   2                LED4=1;
+ 103   2         }
+ 104   1      }
+ 105          
+ 106          /*********************************************************/
+ 107          // 定时器0中断服务程序.
+ 108          /*********************************************************/
+ 109          void timer0() interrupt 1 
+ 110          {  
+ 111   1              if(longorshorttimerflag==0){
+ 112   2                      TR0=0;
+ 113   2                              TH0=(PWM_1/256);            //脉宽调节
+ 114   2                      TL0=(PWM_1%256);
+ 115   2                       out_1=1;      //启动输出
+ 116   2                               longorshorttimerflag=!longorshorttimerflag;
+ 117   2                               TR0=1;
+C51 COMPILER V7.00  PWMDUOJI                                                               05/29/2010 00:33:39 PAGE 3   
+
+ 118   2               }
+ 119   1              else {
+ 120   2                      
+ 121   2                      TR0=0;
+ 122   2                      timerbuf[0]=-0xB800+PWM_1;
+ 123   2                      TH0=timerbuf[0]/256;
+ 124   2                      TL0=timerbuf[0]%256;
+ 125   2                      out_1=0;      //关闭输出
+ 126   2                      longorshorttimerflag=!longorshorttimerflag;
+ 127   2                      TR0=1;
+ 128   2              }
+ 129   1      }
+ 130          
+ 131          /*********************************************************/
+ 132          // 定时器1中断服务程序
+ 133          /*********************************************************/
+ 134          void timer1() interrupt 3 
+ 135          { 
+ 136   1              if(longorshorttimerflag_2==0){
+ 137   2                      TR1=0;
+ 138   2                              TH1=(PWM_2/256);            //脉宽调节
+ 139   2                      TL1=(PWM_2%256);
+ 140   2                       out_2=1;      //启动输出
+ 141   2                               longorshorttimerflag_2=!longorshorttimerflag_2;
+ 142   2                               TR1=1;
+ 143   2               }
+ 144   1              else {
+ 145   2                      
+ 146   2                      TR1=0;
+ 147   2                      timerbuf[1]=-0xB800+PWM_2;
+ 148   2                      TH0=timerbuf[1]/256;
+ 149   2                      TL0=timerbuf[1]%256;
+ 150   2                      out_2=0;      //关闭输出
+ 151   2                      longorshorttimerflag_2=!longorshorttimerflag_2;
+ 152   2                      TR1=1;
+ 153   2              }
+ 154   1      }
+ 155          /*********************************************************/
+ 156          // 延时子程序
+ 157          /*******************************************************/
+ 158          void delayms(unsigned char ms) 
+ 159          
+ 160          {
+ 161   1          unsigned char i;
+ 162   1          while(ms--)
+ 163   1           {
+ 164   2              for(i=0;i<120;i++);
+ 165   2           }
+ 166   1      }
+ 167          
+ 168          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    279    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V7.00  PWMDUOJI                                                               05/29/2010 00:33:39 PAGE 4   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

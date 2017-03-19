@@ -1,0 +1,637 @@
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE _ﬂµ_µÁ_Ω
+OBJECT MODULE PLACED IN ∏ﬂµÕµÁ∆Ω.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ∏ﬂµÕµÁ∆Ω.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /******************************************************************************************\ 
+   2          ============================================================================================
+   3          * T905.c
+   4          *
+   5          * This file is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTYT; 
+   6          * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   7          *
+   8          *
+   9          * NOTES:
+  10          * This program is for the nRF905 with 232 interface;
+  11          * $write date: 2004.4.7 ;time 11:00$
+  12          * $Revision: 1 $
+  13          *
+  14          /*******************************************************************************************/
+  15          #include <reg52.h>
+  16          #include <intrins.h>
+  17          
+  18          #define uchar unsigned char 
+  19          #define uint  unsigned int
+  20          
+  21          #define WC              0x00                    // Write configuration register command
+  22          #define RC              0x10                    // Read  configuration register command
+  23          #define WTP             0x20                    // Write TX Payload  command
+  24          #define RTP             0x21                    // Read  TX Payload  command
+  25          #define WTA             0x22                    // Write TX Address  command
+  26          #define RTA             0x23                    // Read  TX Address  command
+  27          #define RRP             0x24                    // Read  RX Payload  command
+  28          /*******************************************************************************************/
+  29          typedef struct RFConfig
+  30          {
+  31                  uchar n;
+  32                  uchar buf[10];
+  33          }RFConfig;
+  34          
+  35          code RFConfig RxTxConf={
+  36                  10,
+  37                  0x01, 0x0c, 0x44, 0x20, 0x20, 0xcc, 0xcc, 0xcc,0xcc, 0x58       
+  38          };
+  39          // The content of this struct is nRF905's initialize data.≥ı ºªØ ˝æ›
+  40          // CH_NO=1;433MHZ;Normal Opration,No Retrans;RX,TX Address is 4 Bytes
+  41          // RX TX Payload Width is 32 Bytes;Disable Extern Clock;Fosc=16MHZ
+  42          // 8 Bits CRC And enable
+  43          /*******************************************************************************************/
+  44          uchar data TxBuf[32];
+  45          uchar data RxBuf[32];
+  46          uchar data Textbuf[2];
+  47          uchar key;
+  48          uchar rsbrf;
+  49          uchar delayf;
+  50          
+  51          /*******************************************************************************************/
+  52          uchar bdata DATA_BUF;
+  53          sbit    flag=DATA_BUF^7;
+  54          sbit    flag1=DATA_BUF^0;
+  55          /*******************************************************************************************/
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 2   
+
+  56          sbit    TX_EN=P1^7;
+  57          sbit    TRX_CE=P1^6;
+  58          sbit    PWR_UP=P1^5;
+  59          sbit    MISO=P1^1;
+  60          sbit    MOSI=P1^0;
+  61          sbit    SCK=P3^7;
+  62          sbit    CSN=P3^3;
+  63          
+  64          sbit    AM=P1^3;//µÿ÷∑∆•≈‰
+  65          sbit    DR=P3^2;//Ω” ’ªÚ∑¢…‰ÕÍ≥…
+  66          sbit    CD=P1^4;//‘ÿ≤®ºÏ≤‚
+  67          
+  68          sbit duoji_1_up=P2^0;
+  69          sbit duoji_1_down=P2^1;
+  70          sbit duoji_2_up=P2^2;
+  71          sbit duoji_2_down=P2^3;
+  72          
+  73          sbit motor_1_1=P2^4;
+  74          sbit motor_1_2=P2^5;
+  75          sbit motor_2_1=P2^6;
+  76          sbit motor_2_2=P2^7;
+  77          
+  78          //sbit    LED3=P2^4;
+  79          //sbit    LED4=P2^5;
+  80          //sbit    LED1=P2^6;
+  81          //sbit    LED2=P2^7;
+  82          //sbit    KEY1=P3^0;
+  83          //sbit    KEY2=P3^1;
+  84          
+  85          /*******************************************************************************************/
+  86          void InitIO(void);                      // Initialize IO port
+  87          void Inituart(void);                    // initialize 232 uart
+  88          void Config905(void);                   // Config nRF905 module(◊Èº˛°¢ƒ£øÈ)≈‰÷√NRF905ƒ£ Ω
+  89          void SetTxMode(void);                   // Set nRF905 in Tx mode
+  90          void SetRxMode(void);                   // Set nRF905 in Rx mode
+  91          void TxPacket(void);                    // Send data by nRF905
+  92          void RxPacket(void);                    // Recive data by nRF905
+  93          void SpiWrite(uchar);                   // Write data to nRF905
+  94          uchar SpiRead(void);                    // Read data to nRF905
+  95          void Delay(uchar n);                    // Delay 100us
+  96          void Scankey(void);                             // Scan key
+  97          void TxData (uchar x);                  // Send key_value to CRT display
+  98          void comdebug(void);
+  99          void send(unsigned char str[]);
+ 100          void delayms(unsigned char ms);
+ 101          /*******************************************************************************************/
+ 102          void Delay(uchar n)
+ 103          {
+ 104   1              uint i;
+ 105   1              while(n--)
+ 106   1              for(i=0;i<80;i++);      
+ 107   1      }
+ 108          
+ 109          /*######################º”»Îµƒ∂Êª˙≥Ã–Ú≤ø∑÷“ª########################*
+ 110          sbit out_1=P1^2;
+ 111          sbit out_2=P3^4;
+ 112          unsigned int PWM_1=0xFA99;   //∂Êª˙1∏≥≥ı÷µ
+ 113          unsigned int PWM_2=0xFA99;   //∂Êª˙2∏≥≥ı÷µ
+ 114          bit longorshorttimerflag=0;
+ 115          bit longorshorttimerflag_2=0;
+ 116          unsigned int timerbuf[2]={0};
+ 117          /**********************************************************/
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 3   
+
+ 118          void delayms(unsigned char ms);
+ 119          void refree_allpins();
+ 120          
+ 121          
+ 122          
+ 123          /*######################∂Êª˙≤ø∑÷≥Ã–Ú“ªº”»ÎÕÍ±œ####################*/
+ 124          
+ 125          /*********************÷±¡˜µÁª˙º”»Îµƒµ⁄“ª≤ø∑÷*********************************
+ 126          sbit motor11=P2^0;//µÁª˙1µƒ–≈∫≈“˝Ω≈
+ 127          sbit motor12=P2^1;
+ 128          
+ 129          sbit motor21=P2^2;//µÁª˙2µƒ–≈∫≈“˝Ω≈
+ 130          sbit motor22=P2^3;
+ 131          
+ 132          /**********************÷±¡˜µÁª˙º”»Îµƒµ⁄“ª≤ø∑÷Ω· ¯********************************/
+ 133          
+ 134          void main()
+ 135          {
+ 136   1      
+ 137   1      
+ 138   1      
+ 139   1          //================NRF905≥ı ºªØ
+ 140   1              CSN=1;                                          // Spi  disable                                         
+ 141   1              SCK=0;                                          // Spi clock line init high
+ 142   1              DR=1;                                           // Init DR for input
+ 143   1              AM=1;                                           // Init AM for input
+ 144   1              PWR_UP=1;                                       // nRF905 power on
+ 145   1              TRX_CE=0;                                       // Set nRF905 in standby mode
+ 146   1              TX_EN=0;                                        // set radio in Rx mode 
+ 147   1      
+ 148   1              //================
+ 149   1              Config905();                            // Config nRF905 module
+ 150   1      //      TxBuf[0]=1;
+ 151   1      //      TxBuf[1]=1;
+ 152   1      //      SetTxMode();                            // Set Tx Mode
+ 153   1      //      TxPacket();                             // Transmit Tx buffer data
+ 154   1      //      TxBuf[0] = 0xff;
+ 155   1      //      TxBuf[1] = 0xff;
+ 156   1      //LED1=0;
+ 157   1      //LED2=0;
+ 158   1      //Delay(150);
+ 159   1      //LED1=1;
+ 160   1      //LED2=1;
+ 161   1      
+ 162   1                                              // led close
+ 163   1      //      SetRxMode();                            // Set nRF905 in Rx mode
+ 164   1      
+ 165   1      
+ 166   1      /******************º”»Î¥Æø⁄********************************************
+ 167   1              SCON=0x50;//¥Æø⁄∑Ω Ω1£¨‘ –ÌΩ” ’
+ 168   1         TMOD=0x20;//∂® ±∆˜1£¨∂® ±∑Ω Ω2
+ 169   1         TCON=0x40;//…Ë∂® ±∆˜1ø™ ºº∆ ˝
+ 170   1         TH1=0xE8;//11.0592MHz, 1200≤®Ãÿ¬ 
+ 171   1         TL1=0xE8;
+ 172   1         TI=1;
+ 173   1         TR1=1;
+ 174   1      send("before while(1).\n");
+ 175   1      ******************¥Æø⁄º”»ÎΩ· ¯********************************************/
+ 176   1      /*#####################º”»Îµƒ∂Êª˙≥Ã–Ú≤ø∑÷∂˛######################*
+ 177   1          out_1=0;
+ 178   1          out_2=0;
+ 179   1          TMOD=0x11;
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 4   
+
+ 180   1          TH0=0xB8;             //1ms—” ±≥£ ˝ 12M
+ 181   1          TL0=0x00;            //∆µ¬ µ˜Ω⁄
+ 182   1      
+ 183   1          TH1=0xB8;            //¬ˆøÌµ˜Ω⁄//æÕ≤Ó’‚“ªµ„¡À
+ 184   1          TL1=0x00;
+ 185   1      
+ 186   1           EA=1;
+ 187   1           ET0=1;
+ 188   1           ET1=1;    
+ 189   1           TR0=1;
+ 190   1                TR1=1;
+ 191   1      
+ 192   1      
+ 193   1      refree_allpins();
+ 194   1      /*#####################∂Êª˙≤ø∑÷≥Ã–Ú∂˛º”»ÎÕÍ±œ#######################*/
+ 195   1      
+ 196   1      while(1)
+ 197   1      {refree_allpins();
+ 198   2      /***********************************************************/
+ 199   2                        delayms(1);
+ 200   2                      SetRxMode();
+ 201   2                 if (DR){                     // If recive data ready... 
+ 202   3                 RxPacket();                  // ... recive data
+ 203   3                              }
+ 204   2                              
+ 205   2      /*****************************************************/
+ 206   2                      /*##################º”»Îµƒ∂Êª˙≥Ã–Ú≤ø∑÷»˝################################*/
+ 207   2                      if(RxBuf[0]==1){
+ 208   3                  duoji_1_up=0;
+ 209   3                                      }
+ 210   2                 else {
+ 211   3                              duoji_1_up=1;
+ 212   3                                } 
+ 213   2               }//duoji_1_UP//duoji_1_DOWN
+ 214   1      
+ 215   1           if(RxBuf[1]==1){
+ 216   2                duoji_1_down=0;
+ 217   2                                }
+ 218   1                 else {
+ 219   2                              duoji_1_down=1;
+ 220   2                                } 
+ 221   1                }
+ 222          
+ 223                          if(RxBuf[2]==1){
+*** ERROR C141 IN LINE 223 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near 'if'
+*** ERROR C141 IN LINE 223 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 224                    duoji_2_up=0;
+*** ERROR C231 IN LINE 224 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_up': redefinition
+*** ERROR C231 IN LINE 224 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_up': redefinition
+ 225                                    }
+*** ERROR C141 IN LINE 225 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 226                     else {
+ 227                                          duoji_2_up=0;
+*** ERROR C279 IN LINE 227 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_up': multiple initialization
+*** ERROR C231 IN LINE 227 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_up': redefinition
+*** ERROR C231 IN LINE 227 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_up': redefinition
+ 228                                    } 
+*** ERROR C141 IN LINE 228 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 229                    }
+ 230          
+ 231                           if(RxBuf[3]==1){
+*** ERROR C141 IN LINE 231 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 5   
+
+ 232                     duoji_2_down=0;
+*** ERROR C231 IN LINE 232 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_down': redefinition
+*** ERROR C231 IN LINE 232 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_down': redefinition
+ 233                                    }
+*** ERROR C141 IN LINE 233 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 234                     else {
+ 235                                  duoji_2_down=1;
+*** ERROR C279 IN LINE 235 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_down': multiple initialization
+*** ERROR C231 IN LINE 235 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_down': redefinition
+*** ERROR C231 IN LINE 235 OF ∏ﬂµÕµÁ∆Ω.C: 'duoji_2_down': redefinition
+ 236                                    } 
+*** ERROR C141 IN LINE 236 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 237                    }
+ 238          
+ 239          /*################∂Êª˙≤ø∑÷≥Ã–Ú»˝º”»ÎÕÍ±œ################################*/
+ 240          /*******************************÷±¡˜µÁª˙º”»Îµƒµ⁄∂˛≤ø∑÷*************************/
+ 241                                  if(RxBuf[4]==1){
+*** ERROR C141 IN LINE 241 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 242                                          motor_1_1=1;
+*** ERROR C231 IN LINE 242 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+*** ERROR C231 IN LINE 242 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+ 243                                          motor_1_2=0;
+*** ERROR C231 IN LINE 243 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+*** ERROR C231 IN LINE 243 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+ 244                                          motor_2_1=1;
+*** ERROR C231 IN LINE 244 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+*** ERROR C231 IN LINE 244 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+ 245                                          motor_2_2=0;
+*** ERROR C231 IN LINE 245 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+*** ERROR C231 IN LINE 245 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+ 246                                  }
+*** ERROR C141 IN LINE 246 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 247                                  
+ 248                                  if(RxBuf[5]==1){
+*** ERROR C141 IN LINE 248 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 249                                  motor_1_1=0;
+*** ERROR C279 IN LINE 249 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': multiple initialization
+*** ERROR C231 IN LINE 249 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+*** ERROR C231 IN LINE 249 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+ 250                                          motor_1_2=1;
+*** ERROR C279 IN LINE 250 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': multiple initialization
+*** ERROR C231 IN LINE 250 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+*** ERROR C231 IN LINE 250 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+ 251                                          motor_2_1=0;
+*** ERROR C279 IN LINE 251 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': multiple initialization
+*** ERROR C231 IN LINE 251 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+*** ERROR C231 IN LINE 251 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+ 252                                          motor_2_2=1;
+*** ERROR C279 IN LINE 252 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': multiple initialization
+*** ERROR C231 IN LINE 252 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+*** ERROR C231 IN LINE 252 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+ 253                                  }
+*** ERROR C141 IN LINE 253 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 254          
+ 255                                  if(RxBuf[6]==1){
+*** ERROR C141 IN LINE 255 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 256                                          motor_1_1=0;
+*** ERROR C279 IN LINE 256 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': multiple initialization
+*** ERROR C231 IN LINE 256 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+*** ERROR C231 IN LINE 256 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+ 257                                          motor_1_2=1;
+*** ERROR C279 IN LINE 257 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': multiple initialization
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 6   
+
+*** ERROR C231 IN LINE 257 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+*** ERROR C231 IN LINE 257 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+ 258                                          motor_2_1=1;
+*** ERROR C279 IN LINE 258 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': multiple initialization
+*** ERROR C231 IN LINE 258 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+*** ERROR C231 IN LINE 258 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+ 259                                          motor_2_2=0;
+*** ERROR C279 IN LINE 259 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': multiple initialization
+*** ERROR C231 IN LINE 259 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+*** ERROR C231 IN LINE 259 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+ 260                                  }
+*** ERROR C141 IN LINE 260 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 261          
+ 262                                  if(RxBuf[7]==1){
+*** ERROR C141 IN LINE 262 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 263                                  motor_1_1=1;
+*** ERROR C279 IN LINE 263 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': multiple initialization
+*** ERROR C231 IN LINE 263 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+*** ERROR C231 IN LINE 263 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+ 264                                          motor_1_2=0;
+*** ERROR C279 IN LINE 264 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': multiple initialization
+*** ERROR C231 IN LINE 264 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+*** ERROR C231 IN LINE 264 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+ 265                                          motor_2_1=0;
+*** ERROR C279 IN LINE 265 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': multiple initialization
+*** ERROR C231 IN LINE 265 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+*** ERROR C231 IN LINE 265 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+ 266                                          motor_2_2=1;
+*** ERROR C279 IN LINE 266 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': multiple initialization
+*** ERROR C231 IN LINE 266 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+*** ERROR C231 IN LINE 266 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+ 267                                  }
+*** ERROR C141 IN LINE 267 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 268          
+ 269                                  if(RxBuf[8]==1){
+*** ERROR C141 IN LINE 269 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 270                                  motor_1_1=0;
+*** ERROR C279 IN LINE 270 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': multiple initialization
+*** ERROR C231 IN LINE 270 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+*** ERROR C231 IN LINE 270 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+ 271                                          motor_1_2=0;
+*** ERROR C279 IN LINE 271 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': multiple initialization
+*** ERROR C231 IN LINE 271 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+*** ERROR C231 IN LINE 271 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+ 272                                          motor_2_1=1;
+*** ERROR C279 IN LINE 272 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': multiple initialization
+*** ERROR C231 IN LINE 272 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+*** ERROR C231 IN LINE 272 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+ 273                                          motor_2_2=0;
+*** ERROR C279 IN LINE 273 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': multiple initialization
+*** ERROR C231 IN LINE 273 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+*** ERROR C231 IN LINE 273 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+ 274                                  }
+*** ERROR C141 IN LINE 274 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 275          
+ 276                                  if(RxBuf[9]==1){
+*** ERROR C141 IN LINE 276 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '==', expected ')'
+ 277                                  motor_1_1=1;
+*** ERROR C279 IN LINE 277 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': multiple initialization
+*** ERROR C231 IN LINE 277 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+*** ERROR C231 IN LINE 277 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_1': redefinition
+ 278                                          motor_1_2=0;
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 7   
+
+*** ERROR C279 IN LINE 278 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': multiple initialization
+*** ERROR C231 IN LINE 278 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+*** ERROR C231 IN LINE 278 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_1_2': redefinition
+ 279                                          motor_2_1=0;
+*** ERROR C279 IN LINE 279 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': multiple initialization
+*** ERROR C231 IN LINE 279 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+*** ERROR C231 IN LINE 279 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_1': redefinition
+ 280                                          motor_2_2=0;
+*** ERROR C279 IN LINE 280 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': multiple initialization
+*** ERROR C231 IN LINE 280 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+*** ERROR C231 IN LINE 280 OF ∏ﬂµÕµÁ∆Ω.C: 'motor_2_2': redefinition
+ 281                                  }
+*** ERROR C141 IN LINE 281 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 282                  
+ 283                  delayms(10);
+*** ERROR C141 IN LINE 283 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '10'
+ 284          /*******************************÷±¡˜µÁª˙º”»Îµƒµ⁄∂˛≤ø∑÷ÕÍ±œ********************/
+ 285                          
+ 286          }
+*** ERROR C141 IN LINE 286 OF ∏ﬂµÕµÁ∆Ω.C: syntax error near '}'
+ 287          
+ 288          }
+ 289          /*******************************************************************************************/
+ 290          /*******************************************************************************************/
+ 291          //function Config905();
+ 292          /*******************************************************************************************/
+ 293          void Config905(void)
+ 294          {
+ 295   1              uchar i;                                        
+ 296   1              CSN=0;                                          // Spi enable for write a spi command
+ 297   1              SpiWrite(WC);                           // Write config command–¥∑≈≈‰÷√√¸¡Ó
+ 298   1              for (i=0;i<RxTxConf.n;i++)      // Write configration words  –¥∑≈≈‰÷√◊÷
+ 299   1              {
+ 300   2                      SpiWrite(RxTxConf.buf[i]);
+ 301   2              }
+ 302   1              CSN=1;                                          // Disable Spi
+ 303   1      }
+ 304          /*******************************************************************************************/
+ 305          //function SpiWrite();
+ 306          /*******************************************************************************************/
+ 307          void SpiWrite(uchar  byte)
+ 308          {
+ 309   1              uchar i;        
+ 310   1              DATA_BUF=byte;                          // Put function's parameter into a bdata variable               
+ 311   1              for (i=0;i<8;i++)                       // Setup byte circulation bits
+ 312   1              {       
+ 313   2                      
+ 314   2                      if (flag)                               // Put DATA_BUF.7 on data line
+ 315   2                              MOSI=1;
+ 316   2                      else
+ 317   2                              MOSI=0;
+ 318   2                      SCK=1;                                  // Set clock line high
+ 319   2                      DATA_BUF=DATA_BUF<<1;   // Shift DATA_BUF
+ 320   2                      SCK=0;                                  // Set clock line low 
+ 321   2              }       
+ 322   1      }
+ 323          /*******************************************************************************************/
+ 324          //function SpiRead();
+ 325          /*******************************************************************************************/
+ 326          uchar SpiRead(void)
+ 327          {
+ 328   1              uchar i;        
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 8   
+
+ 329   1              for (i=0;i<8;i++)                       // Setup byte circulation bits
+ 330   1              {       
+ 331   2                      DATA_BUF=DATA_BUF<<1;   // Right shift DATA_BUF
+ 332   2                      SCK=1;                                  // Set clock line high
+ 333   2                      if (MISO)
+ 334   2                              flag1=1;                        // Read data
+ 335   2                      else
+ 336   2                              flag1=0;
+ 337   2                                                              
+ 338   2                      
+ 339   2                      SCK=0;                                  // Set clock line low
+ 340   2              }
+ 341   1              return DATA_BUF;                        // Return function parameter
+ 342   1      }
+ 343          /*******************************************************************************************/
+ 344          //function TxPacket();
+ 345          /*******************************************************************************************
+ 346          void TxPacket(void)
+ 347          {
+ 348                  uchar i;
+ 349                  //Config905();                          
+ 350                  CSN=0;                                          // Spi enable for write a spi command   
+ 351                  SpiWrite(WTP);                          // Write payload command
+ 352                  for (i=0;i<32;i++)
+ 353                  {
+ 354                          SpiWrite(TxBuf[i]);             // Write 32 bytes Tx data
+ 355                  }
+ 356                  CSN=1;                                          // Spi disable                                          
+ 357                  Delay(1);
+ 358                  CSN=0;                                          // Spi enable for write a spi command   
+ 359                  SpiWrite(WTA);                          // Write address command
+ 360                  for (i=0;i<4;i++)                       // Write 4 bytes address
+ 361                  {
+ 362                          SpiWrite(RxTxConf.buf[i+5]);
+ 363                  }       
+ 364                  CSN=1;                                          // Spi disable
+ 365                  TRX_CE=1;                                       // Set TRX_CE high,start Tx data transmission
+ 366                  Delay(1);                                       // while (DR!=1);
+ 367                  TRX_CE=0;                                       // Set TRX_CE low
+ 368          }
+ 369          /*******************************************************************************************/
+ 370          //function RxPacket();
+ 371          /*******************************************************************************************/
+ 372          void RxPacket(void)
+ 373          {
+ 374   1              uchar i;        
+ 375   1              TRX_CE=0;                                       // Set nRF905 in standby mode   
+ 376   1              CSN=0;                                          // Spi enable for write a spi command
+ 377   1              SpiWrite(RRP);                          // Read payload command 
+ 378   1              for (i=0;i<32;i++)
+ 379   1              {
+ 380   2                      RxBuf[i]=SpiRead();             // Read data and save to buffer         
+ 381   2              }
+ 382   1              CSN=1;                                          // Disable spi
+ 383   1              while(DR||AM);  
+ 384   1              TRX_CE=1;
+ 385   1               //=====================
+ 386   1                if(RxBuf[0]==1){ 
+ 387   2                                              
+ 388   2      
+ 389   2                                                              }
+ 390   1                      else {
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 9   
+
+ 391   2                                              
+ 392   2      
+ 393   2                      }
+ 394   1      
+ 395   1                 if(RxBuf[1] == 1) {
+ 396   2                                      
+ 397   2      
+ 398   2                      }
+ 399   1                      else{ 
+ 400   2                                                      
+ 401   2                              
+ 402   2                      }                                                       
+ 403   1                                                              
+ 404   1      }
+ 405          
+ 406          /*******************************************************************************************/
+ 407          //function SetTxMode();
+ 408          /*******************************************************************************************
+ 409          void SetTxMode(void)                            
+ 410          {       
+ 411                  TX_EN=1;
+ 412                  TRX_CE=0;
+ 413                  Delay(1);                                       // delay for mode change(>=650us)
+ 414          }                               
+ 415          /*******************************************************************************************/
+ 416          //function SetRxMode();
+ 417          /*******************************************************************************************/
+ 418          void SetRxMode(void)
+ 419          {
+ 420   1              TX_EN=0;
+ 421   1              TRX_CE=1;
+ 422   1              Delay(1);                                       // delay for mode change(>=650us)                               
+ 423   1      }
+ 424          
+ 425          
+ 426          
+ 427          /***************************************
+ 428          void send(unsigned char str[])
+ 429          {
+ 430                  unsigned int i=0;
+ 431                  while(str[i]!='\0')
+ 432                  {
+ 433                          SBUF=str[i];
+ 434                          while(!TI);
+ 435                          TI=0;
+ 436                          i++;
+ 437                          }
+ 438          }
+ 439          ***************************************/
+ 440          void delayms(unsigned char ms) 
+ 441          
+ 442          {
+*** ERROR C231 IN LINE 442 OF ∏ﬂµÕµÁ∆Ω.C: '_delayms': redefinition
+ 443   1          unsigned char i;
+ 444   1          while(ms--)
+ 445   1           {
+ 446   2              for(i=0;i<120;i++);
+ 447   2           }
+ 448   1      }
+ 449          
+ 450          /*********************************************************/
+ 451          // ∂® ±∆˜0÷–∂œ∑˛ŒÒ≥Ã–Ú.(”√”⁄∂Êª˙1)
+C51 COMPILER V7.00  _ﬂµ_µÁ_Ω                                                               06/01/2010 23:23:38 PAGE 10  
+
+ 452          /*********************************************************
+ 453          void timer0() interrupt 1 
+ 454          {  
+ 455                  if(longorshorttimerflag==0){
+ 456                          TR0=0;
+ 457                                  TH0=(PWM_1/256);            //¬ˆøÌµ˜Ω⁄
+ 458                          TL0=(PWM_1%256);
+ 459                           out_1=1;      //∆Ù∂Ø ‰≥ˆ
+ 460                                   longorshorttimerflag=!longorshorttimerflag;
+ 461                                   TR0=1;
+ 462                   }
+ 463                  else {
+ 464                          
+ 465                          TR0=0;
+ 466                          timerbuf[0]=-0xB800+PWM_1;
+ 467                          TH0=timerbuf[0]/256;
+ 468                          TL0=timerbuf[0]%256;
+ 469                          out_1=0;      //πÿ±’ ‰≥ˆ
+ 470                          longorshorttimerflag=!longorshorttimerflag;
+ 471                          TR0=1;
+ 472                  }
+ 473          }
+ 474          
+ 475          /*********************************************************/
+ 476          // ∂® ±∆˜1÷–∂œ∑˛ŒÒ≥Ã–Ú
+ 477          /*********************************************************
+ 478          void timer1() interrupt 3 
+ 479          { 
+ 480                  if(longorshorttimerflag_2==0){
+ 481                          TR1=0;
+ 482                                  TH1=(PWM_2/256);            //¬ˆøÌµ˜Ω⁄
+ 483                          TL1=(PWM_2%256);
+ 484                           out_2=1;      //∆Ù∂Ø ‰≥ˆ
+ 485                                   longorshorttimerflag_2=!longorshorttimerflag_2;
+ 486                                   TR1=1;
+ 487                   }
+ 488                  else {
+ 489                          
+ 490                          TR1=0;
+ 491                          timerbuf[1]=-0xB800+PWM_2;
+ 492                          TH0=timerbuf[1]/256;
+ 493                          TL0=timerbuf[1]%256;
+ 494                          out_2=0;      //πÿ±’ ‰≥ˆ
+ 495                          longorshorttimerflag_2=!longorshorttimerflag_2;
+ 496                          TR1=1;
+ 497                  }
+ 498          }
+ 499          /*********************************************************/
+ 500          void refree_allpins(){
+ 501   1      
+ 502   1                  motor_1_1=0;
+ 503   1                                      motor_1_2=0;
+ 504   1                                      motor_2_1=0;
+ 505   1                                      motor_2_2=0;
+ 506   1      
+ 507   1      }
+ 508          /****************************************************************/
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  100 ERROR(S)
